@@ -1,0 +1,887 @@
+/* NOTE GLOBAL */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  color: #212529;
+  background-color: white;
+  letter-spacing: 1px;
+}
+
+/* NOTE Repeat ele - component */
+button {
+  background-color: #ff0e83;
+
+  color: white;
+  text-align: center;
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+
+  border: 1px white solid;
+  border-radius: 5px;
+  padding: 13px 32px;
+
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+  border-color: #ff0e83;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  text-align: center;
+
+  margin-bottom: 3rem;
+}
+/* NOTE HEADER */
+
+header {
+  background-color: #4e2a84;
+  padding: 20px 0;
+
+  position: fixed;
+  /* phải set lại width vì bị pos reset */
+  z-index: 100;
+
+  width: 100%;
+}
+.header__content {
+  width: 70%;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header__content ul {
+  list-style: none;
+}
+
+.header__content li {
+  display: inline;
+  margin: 0 1rem;
+}
+
+.header__content ul a {
+  text-decoration: none;
+
+  color: white;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+
+  transition: all 0.2s;
+}
+
+.header__content ul a:hover {
+  color: #ff0e83;
+}
+.header__content p {
+  color: white;
+  font-size: 2.3rem;
+}
+
+.header__content ul .active a {
+  color: #ff0e83;
+}
+/* NOTE CAROUSEL */
+/* Vì carousel chỉ có 1 thẻ con nên có thể tận dụng flexbox để canh center div con duy nhất*/
+
+.carousel {
+  background-image: url(../img/b3.jpg);
+  height: 800px;
+  background-size: cover;
+  background-position: center;
+
+  color: white;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel h1 {
+  font-size: 3.5rem;
+}
+
+.carousel p {
+  font-size: 1.1rem;
+  margin: 23px;
+}
+
+/* NOTE animation for carousel button */
+/* 
+  timing function option như transform
+*/
+/* animation: name duration timing-function delay iteration-count direction fill-mode; */
+/* animation: upDown 0.5s linear 0s infinite; */
+/* .carousel button:hover {
+  animation: upDown2 0.5s linear 0s infinite;
+} */
+
+/* BUG iteration-count: initial ko chạy, check */
+
+/* 
+iteration-count: initial = 1 lần chuyển động 
+direction: reverse - đi ngược, alternate - lần chẵn sẽ đi reverse 
+fill-mode: forwards, đi xong hết animation sẽ giữ màu đó nếu ko bị reset
+fill-mode: backwards - gg, đi xong reset ?
+*/
+
+.carousel__content:hover button {
+  animation: upDown3 2s 1s 1 backwards;
+}
+
+/* NOTE INTRO */
+/* TODO fix responsive img bằng div chữ */
+/* TODO fix grid dàn 2 hình cao ngang nhau */
+.intro {
+  display: grid;
+  /* grid-template-columns: 25% 25% 25% 25%; */
+  /* grid-template-columns: repeat(4,25%); */
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.intro__ab1 {
+  /* grid-column: 2/4; */
+  grid-column: 2 / span 2;
+}
+
+.intro__bake {
+  grid-column: 1/3;
+}
+
+.intro__ab4 {
+  grid-column: 3 / span 2;
+}
+
+.intro__item img {
+  width: 100%;
+  /* xử lí phần hở do inline img */
+  display: block;
+}
+
+/* div con chiếm 100% flexbox nên ko cần justify-content: center */
+/* ở đây sẽ xử lý bằng padding div cha để ép vô */
+.intro__item {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.intro__item div {
+  padding: 0 32px;
+}
+
+.intro__item h3 {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.intro__item p {
+  color: #c1c1c1;
+  font-size: 0.875rem;
+  line-height: 20px;
+}
+
+.intro .intro__item:first-child,
+.intro .intro__item:nth-child(8) {
+  background-color: #4e2a84;
+}
+
+.intro .intro__item:nth-child(3) {
+  background-color: #ff0e83;
+}
+
+.intro .intro__item:nth-child(4) {
+  background-color: #ed6498;
+}
+
+.intro .intro__item:nth-child(6) {
+  background-color: #836eaa;
+}
+
+/* NOTE NUMBER */
+.number {
+  padding: 70px 0;
+}
+.number__content {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.number__item p:first-of-type {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #4e2a84;
+}
+
+.number__item p:last-of-type {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+/* NOTE SERVICES */
+/* TODO 
+fix center icon responsive
+fix responsive button drop xuống vì h3 đẩy
+*/
+
+.services {
+  background-image: url(../img/s1.jpg);
+  background-size: cover;
+
+  text-align: center;
+
+  padding: 70px 0;
+}
+
+.services h2 {
+  color: white;
+}
+
+.service__content {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.services__item {
+  padding: 0 20px;
+}
+
+/* line height canh giữa khi chỉ có 1 hàng chữ duy nhất */
+.services__item i {
+  width: 105px;
+  height: 105px;
+  border: 1px solid #4e2a84;
+  border-radius: 50%;
+
+  background-color: white;
+  color: #4e2a84;
+
+  font-size: 3.75rem;
+  line-height: 105px;
+
+  transition: all 0.3s;
+}
+
+.services__item h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 17px 0;
+}
+
+.services__item p {
+  font-size: 0.875rem;
+  line-height: 25px;
+  margin-bottom: 12px;
+}
+
+.services__item button {
+  padding: 12px 27px;
+  border-width: 2px;
+}
+
+.services__item:hover i {
+  color: #ff0e83;
+}
+
+/* NOTE GALLERY */
+.gallery {
+  padding: 70px 0;
+}
+
+.gallery__content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  padding: 0 15px;
+}
+
+.gallery__g1 {
+  grid-column: 1 / span 2;
+}
+
+.gallery__g6 {
+  grid-column: 3 / span 2;
+}
+
+/* height 100% dãn nhẹ hình */
+.gallery__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* NOTE OVERLAY */
+/* TODO responsive text theo width của item */
+.gallery__item {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(48, 132, 163, 0.2);
+  color: white;
+
+  text-align: right;
+
+  padding: 38px 28px;
+}
+
+.gallery__overlay p {
+  position: absolute;
+  bottom: 38px;
+  right: 28px;
+
+  font-size: 0.75rem;
+
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.3s;
+}
+
+/* Gọi từ div lớn nhất cho an toàn */
+.gallery__item:hover .gallery__overlay p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* có thể dùng padding - margin - position - transform */
+
+.gallery__overlay h3 {
+  font-size: 1.875rem;
+  transform: translateY(20px);
+}
+
+.gallery__item:hover .gallery__overlay h3 {
+  transform: translateY(0);
+  transition: all 0.3s;
+}
+
+.gallery__overlay h3 span {
+  font-weight: 300;
+}
+
+.gallery__overlay h3::after {
+  content: "";
+
+  width: 100%;
+  height: 5px;
+  display: block;
+  margin-top: 10px;
+
+  transform: translateY(20px);
+  transition: all 0.3s;
+  opacity: 0;
+
+  background-color: white;
+}
+
+.gallery__item:hover .gallery__overlay h3::after {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* NOTE overlay css3 transform */
+
+.team__overlay--translateX {
+  overflow: hidden;
+}
+
+.team__overlay--translateX .team__detail {
+  opacity: 1;
+  transform: translateX(-100%);
+}
+
+.team__overlay--translateX:hover .team__detail {
+  transform: translateX(0);
+}
+/* BUG thu nhỏ thì chữ lấn vô, 
+translate Y ko đủ và sẽ có chữ bị hiện */
+.team__overlay--translateY {
+  overflow: hidden;
+}
+
+.team__overlay--translateY .team__detail {
+  opacity: 1;
+  transform: translateY(-100%);
+}
+
+.team__overlay--translateY:hover .team__detail {
+  transform: translateY(0);
+}
+
+/* .team__overlay--rotate .team__detail {
+  opacity: 0;
+  transform: rotate(0);
+} */
+
+.team__overlay--rotate:hover .team__detail {
+  opacity: 1;
+  transform: rotate(360deg);
+}
+
+.team__overlay--zoomout .team__detail {
+  transform: scale(0);
+}
+
+.team__overlay--zoomout:hover .team__detail {
+  transform: scale(1);
+}
+
+/* transform skew làm hình bị méo, phải thiết kế lại layout
+ */
+
+/* NOTE TEAM */
+/* TODO fix responsive */
+.team {
+  background-color: #4e2a84;
+  padding: 70px 0;
+}
+
+.team h2 {
+  color: white;
+}
+
+.team__content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px 30px;
+
+  width: 75%;
+  margin: 0 auto;
+}
+
+.team__item img {
+  width: 100%;
+  display: block;
+}
+.team__item {
+  position: relative;
+}
+
+/* ko dùng height được vì bị lố ra */
+.team__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* width:100%; */
+  /* vẫn ok */
+
+  padding: 30px;
+
+  background-color: #ff0e83;
+  color: white;
+
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.team__detail h3,
+.team__title h3 {
+  font-size: 1.3rem;
+}
+
+.team__title p {
+  font-size: 0.875rem;
+  line-height: 28px;
+}
+
+.team__detail {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* width: 100%;
+  height: 100%; */
+  bottom: 0;
+  right: 0;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 100px 40px;
+
+  transition: all 0.3s;
+  opacity: 0;
+}
+
+.team__detail h3 {
+  color: #ff0e83;
+}
+
+.team__text {
+  margin: 8px 0;
+}
+
+.team__socials {
+  margin-top: 24px;
+}
+
+.team__socials i {
+  width: 37px;
+  height: 37px;
+
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  margin: 0 5px;
+
+  line-height: 37px;
+  text-align: center;
+
+  transition: all 0.3s;
+}
+
+.team__socials i:hover {
+  color: #ff0e83;
+  border-color: #ff0e83;
+}
+
+.team__item:hover .team__detail {
+  opacity: 1;
+}
+
+.team__item:hover .team__title {
+  opacity: 0;
+}
+
+/* NOTE FEEDBACK */
+.feedback {
+  background-image: url(../img/cc1.jpg);
+  background-size: cover;
+  padding: 70px 0;
+}
+
+.feedback h2 {
+  color: white;
+}
+
+.feedback__content {
+  width: 75%;
+
+  border: 3px solid #ff0e83;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.feedback__content i {
+  color: #2cbeff;
+  font-size: 1.3rem;
+  padding: 0 18px;
+}
+
+.feedback__content p {
+  line-height: 30px;
+  letter-spacing: 1.3px;
+}
+
+.feedback__name {
+  color: white;
+}
+
+/* Nên gọi kèm class cha bao ngoài để tránh đè toàn bộ thư viện owl Carousel */
+.feedback__content .owl-theme .owl-dots .owl-dot span {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.feedback__content .owl-theme .owl-dots .owl-dot.active span {
+  background-color: black;
+}
+
+/* .feedback__content .owl-theme .owl-dots .owl-dot:focus{
+  outline: solid;
+} */
+
+/* NOTE CONTACT */
+
+.contact {
+  padding: 70px 0;
+}
+
+.contact__form form {
+  width: 70%;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px 30px;
+}
+
+.contact__form button,
+.contact__form textarea {
+  grid-column: 1 / span 2;
+  padding: 15px;
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.contact__form input {
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.contact__form input:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.contact__form textarea {
+  border: 1px solid black;
+  resize: none;
+}
+
+.contact__form textarea:focus {
+  outline: none;
+}
+
+.contact__form textarea::placeholder {
+  color: black;
+}
+
+.contact__form button {
+  border-radius: 0;
+  color: black;
+}
+
+.contact__form button:hover {
+  color: white;
+  background-color: black;
+  border-color: black;
+}
+
+.contact__map iframe {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.contact__info {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.contact__info i {
+  font-size: 2rem;
+  color: #4e2a84;
+}
+
+.contact__info p {
+  font-size: 0.8rem;
+  margin: 10px 0;
+}
+
+/* NOTE FOOTER */
+footer {
+  padding: 50px 0;
+
+  background-color: black;
+  color: white;
+}
+
+.footer__main {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.footer__item {
+  width: 25%;
+  padding: 0 20px;
+}
+
+.footer__item h3 {
+  color: #ff0e83;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.footer__item p {
+  font-size: 0.8rem;
+  line-height: 28px;
+  margin-bottom: 1rem;
+}
+
+/* có thể dùng class team social hoặc set css chung lên global */
+.footer__socials i {
+  width: 35px;
+  height: 35px;
+
+  line-height: 35px;
+  text-align: center;
+
+  margin-right: 10px;
+
+  border: 1px solid white;
+
+  transition: all 0.3s;
+}
+
+.footer__socials i:hover {
+  color: #ff0e83;
+  border-color: #ff0e83;
+}
+
+/* Working time */
+/* TODO responsive working time, responsive font chữ */
+.footer__time {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px white dotted;
+}
+
+.footer__time p {
+  margin: 10px 0;
+  padding: 0;
+}
+
+.footer__item .footer__sub input {
+  margin-bottom: 1rem;
+  padding: 10px;
+
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.footer__item .footer__sub input:focus {
+  outline: none;
+}
+
+.footer__item .footer__sub button {
+  padding: 7px 16px;
+  margin-bottom: 24px;
+
+  font-weight: 700;
+
+  color: black;
+  border-color: #ff0e83;
+}
+
+.footer__item .footer__sub button:hover {
+  border-color: black;
+}
+
+/* NOTE COPYRIGHT */
+.footer__copyright {
+  margin-top: 50px;
+
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.footer__copyright span {
+  color: #ff0e83;
+}
+
+/* Khai báo chuỗi chuyển động */
+@keyframes upDown {
+  0% {
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Cách khai báo 2: from to */
+/* ko set animation quay về nên sẽ giựt */
+@keyframes upDown2 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(50px);
+  }
+}
+
+@keyframes upDown3 {
+  0% {
+    transform: translateY(0);
+    background-color: red;
+  }
+  100% {
+    transform: translateY(50px);
+    background-color: yellow;
+  }
+}
+
+/* NOTE Back to top */
+.backToTop {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+
+  visibility: hidden;
+  opacity: 0;
+}
+
+.backToTop i {
+  width: 40px;
+  height: 40px;
+
+  color: #0bbbcc;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 36px;
+
+  border: 2px solid #0bbbcc;
+  border-radius: 50%;
+}
+
+/* 
+back to top docs
+https://codyhouse.co/gem/back-to-top 
+*/
+.cd-top--is-visible {
+  /* // back-to-top button visible */
+  visibility: visible;
+  opacity: 1;
+}
+
+.cd-top--fade-out {
+  /* // reduce button opacity if user keeps scrolling */
+  opacity: 0.5;
+}
